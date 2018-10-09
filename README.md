@@ -1,4 +1,4 @@
-# java-getting-started
+# Angular 5 + Spring Boot 2.0.5
 
 [![CircleCI](https://circleci.com/gh/heroku/java-getting-started.svg?style=svg)](https://circleci.com/gh/heroku/java-getting-started)
 
