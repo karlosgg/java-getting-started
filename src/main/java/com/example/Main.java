@@ -82,7 +82,7 @@ public class Main {
 
     String employees="";
     File resource = null;
-    Resource res = resourceLoader.getResource("file"+System.getProperty("java.io.tmpdir")+"/texto.txt");
+    Resource res = resourceLoader.getResource("file:"+System.getProperty("java.io.tmpdir")+"/texto.txt");
     File file=null;
     String s=">";
 
