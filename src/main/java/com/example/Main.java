@@ -24,6 +24,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.sql.DataSource;
@@ -49,7 +50,8 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index() {
+  String index(Model model) {
+    model.addAttribute("tmpDir", System.getProperty("java.io.tmpdir"));
     return "index";
   }
 
