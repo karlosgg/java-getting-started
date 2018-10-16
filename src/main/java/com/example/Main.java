@@ -24,6 +24,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.sql.DataSource;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,6 +75,17 @@ public class Main {
     Resource template = ctx.getResource(System.getProperty("java.io.tmpdir")+"/texto.txt");
     model.addAttribute("ctx", template);
     model.addAttribute("tmpDir", System.getProperty("java.io.tmpdir"));
+
+    String employees="";
+    File resource = null;
+    try {
+      resource = template.getFile();
+      employees = new String(
+              Files.readAllBytes(resource.toPath()));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    model.addAttribute("cadena", employees);
     return "index";
   }
 
