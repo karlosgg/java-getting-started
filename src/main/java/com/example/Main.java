@@ -26,6 +26,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,9 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
+  @Autowired
+  private ResourceLoader resourceLoader;
+
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
   }
@@ -78,14 +82,20 @@ public class Main {
 
     String employees="";
     File resource = null;
+    Resource res = resourceLoader.getResource("file"+System.getProperty("java.io.tmpdir")+"/texto.txt");
+    File file=null;
+    String s=">";
+
     try {
-      resource = template.getFile();
-      employees = new String(
-              Files.readAllBytes(resource.toPath()));
+      file = res.getFile();
+      s = new String(Files.readAllBytes(file.toPath()));
+      //resource = template.getFile();
+      //employees = new String(
+        //      Files.readAllBytes(resource.toPath()));
     } catch (IOException e) {
       e.printStackTrace();
     }
-    model.addAttribute("cadena", employees);
+    model.addAttribute("cadena", s);
     return "index";
   }
 
