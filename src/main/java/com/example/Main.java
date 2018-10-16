@@ -22,12 +22,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.sql.DataSource;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +48,9 @@ public class Main {
   private String dbUrl;
 
   @Autowired
+  private ApplicationContext ctx;
+
+  @Autowired
   private DataSource dataSource;
 
   public static void main(String[] args) throws Exception {
@@ -51,6 +59,18 @@ public class Main {
 
   @RequestMapping("/")
   String index(Model model) {
+    String str = "Hello";
+    BufferedWriter writer = null;
+    try {
+      writer = new BufferedWriter(new FileWriter(System.getProperty("java.io.tmpdir")+"/texto.txt"));
+      writer.write(str);
+      writer.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Resource template = ctx.getResource(System.getProperty("java.io.tmpdir")+"/texto.txt");
+    model.addAttribute("ctx", template);
     model.addAttribute("tmpDir", System.getProperty("java.io.tmpdir"));
     return "index";
   }
