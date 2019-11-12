@@ -1,0 +1,22 @@
+#server.servlet.context-path=/web
+spring:
+#  datasource:
+#    url: ${JDBC_DATABASE_URL:}
+#    hikari:
+#      connection-timeout: 30000
+#      maximum-pool-size: 10
+#
+#  profiles:
+#    active:
+#      production:
+
+  thymeleaf:
+    mode: HTML
+    prefix: classpath:/templates/views/
+
+logginglevel:
+  org:
+    springframework: INFO
+
+server:
+    port: ${PORT:5000}
