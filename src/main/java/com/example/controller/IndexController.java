@@ -9,13 +9,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/info")
-public class InfoController {
+@RequestMapping("")
+public class IndexController {
 
-    @RequestMapping("/")
+    @RequestMapping("/info")
     public ResponseEntity info(){
         Map response = new HashMap<>();
         response.put("response","Wellcome");
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @RequestMapping("/login")
+    public ResponseEntity login(){
+        Map response = new HashMap<>();
+        response.put("response","Login");
         return new ResponseEntity(response, HttpStatus.OK);
     }
 }

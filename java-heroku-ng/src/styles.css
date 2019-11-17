@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "BebasFont";
+  src: url("assets/fonts/BebasNeue-Regular.otf");
+}
+
+h1{
+  font-family: BebasFont;
+  font-size: 80px;
+}
